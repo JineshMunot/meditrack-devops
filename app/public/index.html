@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MediTrack - Patient Records</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>MediTrack <span>Patient Records</span></h1>
+    <div id="badge" class="badge">loading...</div>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Add patient</h2>
+      <form id="form">
+        <input name="name" placeholder="Full name" required minlength="2" maxlength="100">
+        <input name="age" type="number" placeholder="Age" required min="0" max="120">
+        <select name="gender" required>
+          <option value="">Gender</option>
+          <option>Male</option><option>Female</option><option>Other</option>
+        </select>
+        <input name="diagnosis" placeholder="Diagnosis" required minlength="2" maxlength="200">
+        <button type="submit">Save</button>
+      </form>
+      <p id="msg" class="msg"></p>
+    </section>
+
+    <section class="card">
+      <h2>Patients <small id="count"></small></h2>
+      <table>
+        <thead><tr><th>ID</th><th>Name</th><th>Age</th><th>Gender</th><th>Diagnosis</th><th></th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Audit trail (last 10 actions)</h2>
+      <table>
+        <thead><tr><th>Action</th><th>Detail</th><th>Served by</th><th>Time</th></tr></thead>
+        <tbody id="audit"></tbody>
+      </table>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

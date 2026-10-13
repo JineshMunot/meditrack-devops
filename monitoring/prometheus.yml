@@ -1,0 +1,23 @@
+global:
+  scrape_interval: 10s
+
+scrape_configs:
+  # every patient-app pod (blue + green) is discovered automatically from Kubernetes
+  - job_name: patient-app
+    kubernetes_sd_configs:
+      - role: pod
+        kubeconfig_file: /kube/config
+        namespaces:
+          names: [healthcare]
+    relabel_configs:
+      - source_labels: [__meta_kubernetes_pod_label_app]
+        regex: patient-app
+        action: keep
+      - source_labels: [__meta_kubernetes_pod_label_slot]
+        target_label: slot
+      - source_labels: [__meta_kubernetes_pod_name]
+        target_label: pod
+
+  - job_name: node
+    static_configs:
+      - targets: ['localhost:9100']
